@@ -1,0 +1,9 @@
+En la clase de implementación de CinemaPersistence hay una condición de carrera de tipo read-write-modify ya que puede suceder que se realice mas de una petición al mismo tiempo sobre el hashmap de cinemas, para solucionarlo se hará uso de un concurrent hashmap. El cual es Thread safe y funciona para multiples procesos concurrentes.
+
+Las regiones criticas encontradas fueron 
+
+En el caso en el que se esté accediendo al hashmap en la mayoría de metodos de la implementación se esta realizando esta operacion: Cinema cinema = cinemas.get(name);
+
+En el caso en que se desee añadir una función a un cinema o modificar dicha funcion, en los métodos  addFunctionToCinema, 
+updateFunctionByCinema y en el método buy ticket.
+

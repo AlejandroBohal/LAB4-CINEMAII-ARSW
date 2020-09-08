@@ -69,7 +69,7 @@ public class CinemaAPIController {
             CinemaFunction data = cinemaServices.addFunctionToCinema(name,function);
             return  new ResponseEntity<>(data,HttpStatus.CREATED);
         }catch (CinemaPersistenceException e){
-            throw new ResourceNotFoundException(e.getMessage(),e);
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
         }
     }
     @RequestMapping(value = "/cinemas/{name}",method = RequestMethod.PUT )
@@ -78,7 +78,7 @@ public class CinemaAPIController {
             CinemaFunction data = cinemaServices.updateFunctionByCinema(name,function);
             return new ResponseEntity<>(data,HttpStatus.CREATED);
         }catch (CinemaPersistenceException e){
-            throw new ResourceNotFoundException(e.getMessage(),e);
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
         }
     }
 

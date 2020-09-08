@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -23,9 +24,7 @@ import java.util.*;
 @Component
 @Qualifier("inMemoryCP")
 public class InMemoryCinemaPersistence implements CinemaPersitence{
-    
-    private final Map<String,Cinema> cinemas=new HashMap<>();
-
+    private final ConcurrentHashMap<String,Cinema> cinemas=new ConcurrentHashMap<>();
     public InMemoryCinemaPersistence() {
         //load stub data
         String functionDate = "2018-12-18 15:30";
@@ -39,8 +38,6 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
         cinemas.put("cinemaD", this.getCinemaD());
         cinemas.put("cinemaF", this.getCinemaF());
     }
-
-
     @Override
     public void buyTicket(int row, int col, String cinema, String date, String movieName) throws CinemaException {
         Cinema cinemaTicket = this.cinemas.get(cinema);
@@ -56,7 +53,6 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
             throw new CinemaException("No se encontraron funciones con los parametros indicados.");
         }
     }
-
     @Override
     public List<CinemaFunction> getFunctionsbyCinemaAndDate(String cinema, String date) throws CinemaPersistenceException {
         List<CinemaFunction> functions = new LinkedList<>();
@@ -71,9 +67,7 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
             throw new CinemaPersistenceException("Not functions found");
         }
         return functions;
-
     }
-
     @Override
     public void saveCinema(Cinema c) throws CinemaPersistenceException {
         if (cinemas.containsKey(c.getName())){
@@ -83,7 +77,6 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
             cinemas.put(c.getName(),c);
         }   
     }
-
     @Override
     public Cinema getCinema(String name) throws CinemaPersistenceException {
         if (cinemas.get(name) == null){
@@ -91,7 +84,6 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
         }
         return cinemas.get(name);
     }
-
     @Override
     public Set<Cinema> getAllCinemas() throws CinemaPersistenceException {
         if (cinemas.isEmpty()){
@@ -99,7 +91,6 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
         }
         return new HashSet<>(cinemas.values());
     }
-
     @Override
     public CinemaFunction getFunctionbyCinemaAndDateAndMovie(String name, String date, String moviename) throws CinemaPersistenceException{
         CinemaFunction function = null;
@@ -114,9 +105,7 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
             throw new CinemaPersistenceException("Not function found");
         }
         return function;
-
     }
-
     @Override
     public CinemaFunction addFunctionToCinema(String name, CinemaFunction function) throws CinemaPersistenceException {
         if (cinemas.get(name) == null){
@@ -127,7 +116,6 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
             return function;
         }
     }
-
     @Override
     public CinemaFunction updateFunctionByCinema(String name, CinemaFunction function) throws CinemaPersistenceException {
         if(cinemas.get(name) == null){
@@ -149,7 +137,6 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
         cf.setMovie(function.getMovie());
         cf.setSeats(function.getSeats());
     }
-
     private Cinema getCinemaD() {
         String functionDate2 = "2020-12-18 15:30";
         List<CinemaFunction> functions= new ArrayList<>();
