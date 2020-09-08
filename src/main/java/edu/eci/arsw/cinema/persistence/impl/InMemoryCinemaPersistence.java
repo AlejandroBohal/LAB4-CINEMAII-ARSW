@@ -18,6 +18,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * The type In memory cinema persistence.
  *
  * @author cristian
  */
@@ -25,6 +26,10 @@ import java.util.concurrent.ConcurrentHashMap;
 @Qualifier("inMemoryCP")
 public class InMemoryCinemaPersistence implements CinemaPersitence{
     private final ConcurrentHashMap<String,Cinema> cinemas=new ConcurrentHashMap<>();
+
+    /**
+     * Instantiates a new In memory cinema persistence.
+     */
     public InMemoryCinemaPersistence() {
         //load stub data
         String functionDate = "2018-12-18 15:30";
