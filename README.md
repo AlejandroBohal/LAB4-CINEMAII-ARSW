@@ -109,4 +109,4 @@ Para esto:
 
 La solución de la parte 3 se encuentra aquí:
 
-https://github.com/AlejandroBohal/LAB4-CINEMAII-ARSW/
+https://github.com/AlejandroBohal/LAB4-CINEMAII-ARSW/blob/master/ANALISIS_CONCURRENCIA.txt
