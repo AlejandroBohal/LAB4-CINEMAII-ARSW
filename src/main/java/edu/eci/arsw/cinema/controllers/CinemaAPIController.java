@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
+ * The type Cinema api controller.
  *
  * @author cristian
  */
@@ -27,6 +28,13 @@ import org.springframework.web.bind.annotation.*;
 public class CinemaAPIController {
     @Autowired
     private CinemaServices cinemaServices;
+
+    /**
+     * Controller get resource cinema response entity.
+     *
+     * @return the response entity
+     * @throws ResourceNotFoundException the resource not found exception
+     */
     @RequestMapping(value = "/cinemas",method = RequestMethod.GET)
     public ResponseEntity<?> controllerGetResourceCinema() throws ResourceNotFoundException {
         try {
@@ -36,6 +44,14 @@ public class CinemaAPIController {
             throw  new ResourceNotFoundException(e.getMessage(),e);
         }
     }
+
+    /**
+     * Gets cinema by name.
+     *
+     * @param name the name
+     * @return the cinema by name
+     * @throws ResourceNotFoundException the resource not found exception
+     */
     @RequestMapping( value = "/cinemas/{name}",method = RequestMethod.GET)
     public ResponseEntity<?> getCinemaByName(@PathVariable String name) throws ResourceNotFoundException {
         try {
@@ -45,6 +61,15 @@ public class CinemaAPIController {
             throw  new ResourceNotFoundException(e.getMessage(),e);
         }
     }
+
+    /**
+     * Gets functions by name and date.
+     *
+     * @param name the name
+     * @param date the date
+     * @return the functions by name and date
+     * @throws ResourceNotFoundException the resource not found exception
+     */
     @RequestMapping( value = "/cinemas/{name}/{date}",method = RequestMethod.GET)
     public ResponseEntity<?> getFunctionsByNameAndDate(@PathVariable String name,@PathVariable String date) throws ResourceNotFoundException {
         try {
@@ -54,6 +79,16 @@ public class CinemaAPIController {
             throw  new ResourceNotFoundException(e.getMessage(),e);
         }
     }
+
+    /**
+     * Gets functions by name and date and movie.
+     *
+     * @param name      the name
+     * @param date      the date
+     * @param moviename the moviename
+     * @return the functions by name and date and movie
+     * @throws ResourceNotFoundException the resource not found exception
+     */
     @RequestMapping( value = "/cinemas/{name}/{date}/{moviename}",method = RequestMethod.GET)
     public ResponseEntity<?> getFunctionsByNameAndDateAndMovie(@PathVariable String name,@PathVariable String date,@PathVariable String moviename) throws ResourceNotFoundException {
         try {
@@ -63,6 +98,15 @@ public class CinemaAPIController {
             throw  new ResourceNotFoundException(e.getMessage(),e);
         }
     }
+
+    /**
+     * Add function to cinema response entity.
+     *
+     * @param name     the name
+     * @param function the function
+     * @return the response entity
+     * @throws ResourceNotFoundException the resource not found exception
+     */
     @RequestMapping(value = "/cinemas/{name}",method = RequestMethod.POST )
     public ResponseEntity<?> addFunctionToCinema(@PathVariable String name,@RequestBody CinemaFunction function) throws ResourceNotFoundException{
         try{
@@ -72,6 +116,15 @@ public class CinemaAPIController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
         }
     }
+
+    /**
+     * Update function by cinema response entity.
+     *
+     * @param name     the name
+     * @param function the function
+     * @return the response entity
+     * @throws ResourceNotFoundException the resource not found exception
+     */
     @RequestMapping(value = "/cinemas/{name}",method = RequestMethod.PUT )
     public ResponseEntity<?> updateFunctionByCinema(@PathVariable String name,@RequestBody CinemaFunction function) throws ResourceNotFoundException{
         try{
