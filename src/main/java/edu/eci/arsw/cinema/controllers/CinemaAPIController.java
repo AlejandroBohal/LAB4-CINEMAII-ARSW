@@ -17,10 +17,8 @@ import edu.eci.arsw.cinema.services.CinemaServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 /**
  *
  * @author cristian
@@ -65,4 +63,23 @@ public class CinemaAPIController {
             throw  new ResourceNotFoundException(e.getMessage(),e);
         }
     }
+    @RequestMapping(value = "/cinemas/{name}",method = RequestMethod.POST )
+    public ResponseEntity<?> addFunctionToCinema(@PathVariable String name,@RequestBody CinemaFunction function) throws ResourceNotFoundException{
+        try{
+            CinemaFunction data = cinemaServices.addFunctionToCinema(name,function);
+            return  new ResponseEntity<>(data,HttpStatus.CREATED);
+        }catch (CinemaPersistenceException e){
+            throw new ResourceNotFoundException(e.getMessage(),e);
+        }
+    }
+    @RequestMapping(value = "/cinemas/{name}",method = RequestMethod.PUT )
+    public ResponseEntity<?> updateFunctionByCinema(@PathVariable String name,@RequestBody CinemaFunction function) throws ResourceNotFoundException{
+        try{
+            CinemaFunction data = cinemaServices.updateFunctionByCinema(name,function);
+            return new ResponseEntity<>(data,HttpStatus.CREATED);
+        }catch (CinemaPersistenceException e){
+            throw new ResourceNotFoundException(e.getMessage(),e);
+        }
+    }
+
 }

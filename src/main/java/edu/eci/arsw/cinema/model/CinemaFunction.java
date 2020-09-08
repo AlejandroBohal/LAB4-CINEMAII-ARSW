@@ -18,7 +18,7 @@ import java.util.List;
 public class CinemaFunction {
     
     private Movie movie;
-    private List<List<Boolean>> seats=new ArrayList<>();
+    private List<List<Boolean>> seats = new ArrayList<>();
     private String date;
     
     public CinemaFunction(){}
@@ -26,11 +26,16 @@ public class CinemaFunction {
     public CinemaFunction(Movie movie, String date){
         this.movie=movie;
         this.date=date;
+        List<List<Boolean>> seats =new ArrayList<>();
         for (int i=0;i<7;i++){
             List<Boolean> row= new ArrayList<>(Arrays.asList(new Boolean[12]));
-            Collections.fill(row, Boolean.TRUE);
-            this.seats.add(row);
+            for(int j=0;j<12;j++){
+                row.set(j,true);
+            }
+            seats.add(row);
         }
+        this.seats = seats;
+
     }
     
     public void buyTicket(int row,int col) throws CinemaException{
@@ -73,8 +78,8 @@ public class CinemaFunction {
         }
         return availability;
     }
-    
-    
-    
-    
+
+    public void setSeats(List<List<Boolean>> seats) {
+        this.seats = seats;
+    }
 }

@@ -70,4 +70,12 @@ public class CinemaServices {
     public CinemaFunction getFunctionByCinemaAndDateAndMovie(String name, String date, String moviename) throws CinemaPersistenceException{
         return cps.getFunctionbyCinemaAndDateAndMovie(name,date,moviename);
     }
+
+    public CinemaFunction addFunctionToCinema(String name, CinemaFunction function) throws CinemaPersistenceException{
+        return cps.addFunctionToCinema(name,function);
+    }
+
+    public CinemaFunction updateFunctionByCinema(String name, CinemaFunction function) throws CinemaPersistenceException{
+        return cps.updateFunctionByCinema(name,function);
+    }
 }

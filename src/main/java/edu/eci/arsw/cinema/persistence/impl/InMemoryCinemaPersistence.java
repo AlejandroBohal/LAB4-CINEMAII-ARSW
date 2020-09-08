@@ -37,7 +37,7 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
         Cinema c=new Cinema("cinemaX",functions);
         cinemas.put("cinemaX", c);
         cinemas.put("cinemaD", this.getCinemaD());
-        cinemas.put("cinemaF", this.getCinemaD());
+        cinemas.put("cinemaF", this.getCinemaF());
     }
 
 
@@ -106,7 +106,7 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
         Cinema cinemaTicket = this.cinemas.get(name);
         List<CinemaFunction> functionsOfOurCinema=cinemaTicket.getFunctions();
         for (CinemaFunction cf: functionsOfOurCinema) {
-            if(cf.getDate().contains(date) && cf.getMovie().getName().equals(moviename)){
+            if(cf.getDate().equals(date) && cf.getMovie().getName().equals(moviename)){
                 function = cf;
             }
         }
@@ -115,6 +115,39 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
         }
         return function;
 
+    }
+
+    @Override
+    public CinemaFunction addFunctionToCinema(String name, CinemaFunction function) throws CinemaPersistenceException {
+        if (cinemas.get(name) == null){
+            throw new CinemaPersistenceException("Cinema not found");
+        }else{
+            Cinema cinema = cinemas.get(name);
+            cinema.getFunctions().add(function);
+            return function;
+        }
+    }
+
+    @Override
+    public CinemaFunction updateFunctionByCinema(String name, CinemaFunction function) throws CinemaPersistenceException {
+        if(cinemas.get(name) == null){
+            throw new CinemaPersistenceException("Cinema not found");
+        }else{
+            for (CinemaFunction cf: cinemas.get(name).getFunctions()){
+                String nameToCompare = function.getMovie().getName();
+                cf.getMovie().getName().equals(nameToCompare);
+                updateFunction(cf,function);
+                return function;
+            }
+        }
+        Cinema cinema = cinemas.get(name);
+        cinema.getFunctions().add(function);
+        return function;
+    }
+    private void updateFunction(CinemaFunction cf, CinemaFunction function) {
+        cf.setDate(function.getDate());
+        cf.setMovie(function.getMovie());
+        cf.setSeats(function.getSeats());
     }
 
     private Cinema getCinemaD() {
