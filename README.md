@@ -8,6 +8,9 @@ diseño de api rest, el cual usa los verbos del protocolo Http
 GET,POST,PUT,DELETE y spring utiliza los respectivos @Requestmapping
 para realizarlos.
 
+#### Integrantes
+- Sergio Alejandro Bohórquez Alzate
+
 ### Pre requisitos
 
 Para correr el proyecto debe tener instalados los siguientes programas
@@ -32,13 +35,15 @@ compilar el proyecto con el siguiente comando:
 Para correr el servidor local de spring con maven utilizaremos 
 el siguiente comando en el directorio raíz
 ```
-mvn springboot:run
+mvn spring-boot:run
 ```
+Para realizar las pruebas de los controladores es necesario utilizar
+MockitoMvc.
 ### Pruebas
 
-Para correr las pruebas usar el siguiente comando.
+Para correr las pruebas con spring utilizar el siguiente comando:
 ```
-mvn test;
+mvn surefire:test
 ```
 
 ## Parte I
